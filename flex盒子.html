@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex盒子</title>
+    <style>
+     html {
+        font-size: 10px;
+    }
+    .container {
+        display: flex;
+        background-color: rgb(222, 132, 22);
+        height: 50rem;
+        flex-direction: row;
+        flex-wrap: wrap-reverse;
+        justify-content: center;
+        align-items: flex-end;
+        align-content: center;
+        
+
+    }
+    .item {
+        width: 30rem;
+        font-size: 8rem;
+    }
+    </style>
+</head>
+<body>
+    <div class="container" style='background-color: brown'>
+    <div class="item" style='background-color: rgb(127, 159, 255)'>1</div>
+    <div class="item" style='background-color: rgb(206, 127, 255)'>2</div>
+    <div class="item" style='background-color: rgb(255, 127, 150)'>3</div>
+    <div class="item" style='background-color: rgb(255, 232, 127)'>4</div>
+    <div class="item" style='background-color: rgb(155, 255, 127)'>5</div>
+    <div class="item" style='background-color: rgb(127, 255, 214)'>6</div>
+    </div>
+    
+</body>
+</html>

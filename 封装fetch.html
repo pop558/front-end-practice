@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装</title>
+</head>
+<body>
+    <form action="123" enctype="application/x-www-form-urlencoded"></form>
+<script>
+let res;
+async function http(obj ) {
+console.log(obj);
+let { method, url, params, data } =obj;
+console.log(method,url,params,data);
+//如果有params，则需要继续加以处理数据——>转换成key=vluse&key=vluse；
+if(params){
+    //对于params的写法：
+    //此时需要把对象转化为key=value&key=value
+    let str=new URLSearchParams(params).toString()
+ //   console.log(str);
+    //拼接问好和URL
+    url += '?'+str;
+}
+    console.log(url);
+//对于data的写法：
+//data要写完整的请求体请求结构——>完整代码hears.....;
+if(data){   
+    res =await fetch(url,{
+    method:method,
+    headers:{
+        'Content-Type':'application/json'
+    },
+    body:JSON.stringify(data) 
+    })
+//因为data条件满足才会用post写法，所以小括号在内部
+} else{
+        res =await fetch(url,{
+            method:method
+        })
+    }
+    return res.json();
+}
+async function fu1( ){
+let res1 =await http({
+        method:'get',
+        url:'https://ajax-base-api-t.itheima.net/api/book/getbook',
+        params:{
+            id:22
+        }
+    })
+}
+fu1()
+async function fu2( ) {
+let res2 =await http({
+        method:'post',
+        url:'https://ajax-base-api-t.itheima.net/api/book/addbook',
+        data:{
+            bookname:'金字塔原理',
+            author:'荣格',
+            publisher:'嘻嘻出版社'
+        }
+    })
+}
+fu2()
+</script>
+</body>
+</html>

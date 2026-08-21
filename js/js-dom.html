@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom</title>
+</head>
+<body>
+    <div class="123">这是一个类的div标签</div>
+    <div class="123">这儿是第二个类选择器标签</div>
+    <div id="zsy">这是一个id的div标签</div>
+    <div>这是一个普通的div标签</div>
+    <script>
+        var Element_id=document.getElementById("zsy");
+        console.log(Element_id);
+        // First:
+        // var Element_class=document.getElementsByClassName('123');
+        // object=Element_class[0];
+        // console.log(object);
+        // Element_class[0].innerHTML='修改第一个类选择器标签文本内容';
+        // Element_class[1].innerHTML='修改第二个类选择器标签文本内容';
+        // Element_id.innerHTML='修改ID选择器标签文本内容';
+        // second:
+       var Element_class1=document.getElementsByClassName('123')[0];
+       var Element_class2=document.getElementsByClassName('123')[1];
+        console.log(Element_class1);
+        console.log(Element_class2);
+        Element_class1.innerHTML='修改第一个类选择器标签文本内容';
+        Element_class2.innerHTML='修改第二个类选择器标签文本内容';
+        Element_id.innerHTML='修改ID选择器标签文本内容';
+        var element_tag=document.getElementsByTagName('div');
+        console.log(element_tag);
+
+        let isDelete = confirm('确定要删除这条数据吗？');
+
+        if (isDelete) {
+            alert('已执行删除操作');
+        } else {
+            alert('已取消删除');
+        }
+
+  // 写法1：仅提示语
+  let userName = prompt('请输入你的姓名：');
+
+  // 写法2：自带默认文字（可选第二个参数）
+  let age = prompt('请输入年龄：', '18');
+
+  // 判断用户有没有输入、没点取消
+  if (userName !== null && userName.trim() !== '') {
+    alert('你好，' + userName);
+  } else {
+    alert('你取消了输入');
+  }
+
+        
+        
+    </script>
+</body>
+</html>

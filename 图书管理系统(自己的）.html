@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图书管理系统</title>
+    <style>
+        th,td  {
+        font-size: 40px;
+        border: 1px solid grey;
+        padding: 8px;
+        font-weight: normal;
+        text-align: left;
+        color: black;
+     }
+      /* #table {
+        font-weight: 10px;
+        background-color: rgb(201, 223, 229);
+        text-align: center;
+        padding: 8px;
+        margin: 20px;
+        border-collapse: collapse;
+        width: 60%;
+     }
+     table{
+        font-weight: 10px;
+        border: 1;
+        text-align: left;
+        padding: 8px;
+        margin: 20px;
+        border-collapse: collapse;
+        background-color: rgb(181, 210, 181);
+        width: 30%;
+     }
+     #title2 {
+        background-color: lightslategray;
+        color: aliceblue;
+     }
+     #table-box {
+        display: flex;
+        flex-wrap:nowrap;
+     } */
+     /* 外层父容器，让两个表格横向并排不换行 */
+.table-box {
+  display: flex;
+  gap: 30px; /* 两个表格之间的间距 */
+}
+#table {
+  background-color: rgb(201, 223, 229);
+  text-align: center;
+  padding: 8px;
+  margin: 20px;
+  border-collapse: collapse;
+}
+table {
+  background-color: rgb(181, 210, 181);
+  text-align: left;
+  padding: 8px;
+  margin: 20px;
+  border-collapse: collapse;
+  /* 删掉原来table里的display:flex！ */
+}
+#title2 {
+  background-color: lightslategray;
+  color: aliceblue;
+}
+/* 修复font-weight错误，font-weight只能填数字100~900，不能写百分比 */
+#table, table {
+  font-weight: normal;
+}
+    </style>
+</head>
+<body>
+    <script src="mybook.js"></script>
+    <h1>图书管理系统：</h1>
+    <div id="table-box"></div>
+    <table id="table">
+        <tr>
+        <th>id</th>
+        <th>书名</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>操作</th>
+    </tr>
+    <tr>
+        <td>1234</td>
+        <td>百万富翁</td>
+        <td>张思源</td>
+        <td>思源出版社</td>
+        <td>
+            <!-- <button onclick="editRow(this)">新增</button> -->
+            <button onclick="deleteRow(this) ">删除</button>
+        </td>
+    </tr>
+    </table>
+    <table>
+        <table>
+  <!-- 标题栏 -->
+  <tr>
+    <td colspan="2" id="title2">添加新图书</td>
+  </tr>
+  <!-- 书名行 -->
+  <tr>
+    <td>书名</td>
+    <td><input type="text" placeholder="请输入图书名称"></td>
+  </tr>
+  <!-- 作者行 -->
+  <tr>
+    <td>作者</td>
+    <td><input type="text" placeholder="请输入作者名字"></td>
+  </tr>
+  <!-- 出版社行 -->
+  <tr>
+    <td>出版社</td>
+    <td><input type="text" placeholder="请输入出版社名称"></td>
+  </tr>
+  <!-- 添加按钮 -->
+  <tr>
+    <td></td>
+    <td><button>添加</button></td>
+  </tr>
+<!-- </table>
+        <tr align="left" id="title2"><th>添加新图书</th></tr>
+        <tr><th>书名</th></tr>
+        <tr><th>作者</th></tr>
+        <tr><th>出版社</th></tr>
+        <tr><th><button onclick="addRow()">新增</button></th></tr>
+    </table> -->
+</div>
+</body>
+</html>

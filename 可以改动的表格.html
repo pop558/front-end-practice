@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>改动表格</title>
+    <style>
+
+    h1 {
+        text-align: center;
+     }
+     th,td  {
+        font-size: 30px;
+        border: 1px solid grey;
+        padding: 8px;
+        font-weight: bold;
+        text-align: center;
+     }
+     table {
+        /* background-color: brown; */
+        width: 100%;
+        /* background-color: antiquewhite; */
+        text-align: center;
+        /* padding: 8px; */
+        margin: 20px;
+        border-collapse: collapse;
+     }
+     
+    </style>
+</head>
+<body>
+    <h1 class="123">可以改动的表格：</h1>
+    <button onclick="addRow()">新增数据</button>
+    <table id="table">
+    <tr>
+        <th>姓名</th>
+        <th>联系方式</th>
+        <th>操作
+            <!-- <button>增加</button>
+            <button>删除</button> -->
+        </th>
+    </tr>
+    <tr>
+        <th>张媛</th>
+        <th>1888888888888</th>
+        <th>
+            <button onclick="editRow(this)">编辑</button>
+            <button onclick="deleteRow(this)">删除</button>
+        </th>
+    </tr>
+
+    </table>
+    <script src="table-script.js"></script>
+</body>
+</html>

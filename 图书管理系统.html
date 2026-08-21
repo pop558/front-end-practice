@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <style>
+        /* 外层容器，左右两栏并排 */
+        .wrap {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        /* 图书表格样式 */
+        #bookTable {
+            border-collapse: collapse;
+            width: 900px;
+        }
+        /* 表头th */
+        #bookTable th {
+            background-color: #222831;
+            color: #fff;
+            padding: 16px 10px;
+            border: 1px solid #444;
+        }
+        /* 单元格td */
+        #bookTable td {
+            padding: 14px 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        /* 删除按钮 */
+        .del-btn {
+            color: #0066ff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        /* 新增表单盒子 */
+        .add-box {
+            width: 320px;
+            border: 1px solid #ccc;
+        }
+        /* 表单标题栏 */
+        .add-title {
+            background-color: #747d8c;
+            color: #fff;
+            padding: 12px;
+            font-size: 18px;
+        }
+        /* 表单内容区域 */
+        .add-content {
+            padding: 15px;
+            background-color: #f8fafa;
+        }
+        /* 每一行输入项 */
+        .form-item {
+            display: flex;
+            margin: 12px 0;
+            align-items: center;
+        }
+        /* 左侧标签 */
+        .form-item label {
+            width: 70px;
+            background-color: #e1e4e8;
+            padding: 8px 4px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        /* 输入框 */
+        .form-item input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+        /* 添加按钮 */
+        #addBtn {
+            margin-top: 10px;
+            background-color: #222;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <!-- 左侧图书表格 -->
+  <table id="bookTable">
+    <!-- 表头放thead，不会被覆盖 -->
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>书名</th>
+            <th>作者</th>
+            <th>出版社</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <!-- 动态数据全部渲染到tbody里 -->
+    <tbody></tbody>
+</table>
+            <!-- 图书数据行，循环生成
+            <tr>
+                <td>xxx</td>
+                <td>xxx</td>
+                <td>xxx</td>
+                <td>xxx</td>
+                <td><span class="del-btn" data-id="${item.id}">删除</span></td>
+            </tr>
+        </table> -->
+
+        <!-- 右侧新增图书表单 -->
+ <div class="add-box">
+    <div class="add-title">添加新图书</div>
+    <!-- 外层套form -->
+    <div class="add-content">
+        <form id="bookForm">
+            <div class="form-item">
+                <label>书名</label>
+                <!-- 必须加name，插件取值用 -->
+                <input name="bookname" type="text" placeholder="请输入图书名称">
+            </div>
+            <div class="form-item">
+                <label>作者</label>
+                <input name="author" type="text" placeholder="请输入作者名字">
+            </div>
+            <div class="form-item">
+                <label>出版社</label>
+                <input name="publisher" type="text" placeholder="请输入出版社名称">
+            </div>
+            <!-- submit按钮 -->
+            <button type="submit" id="addBtn">添加</button>
+        </form>
+    </div>
+</div>
+    <script src="addbook.js"></script>
+    <script src="addboook2.js"></script>
+
+    <!-- <script src="./lib/http.js"></script> -->
+    <!-- 后续JS接口、渲染、删除逻辑写在这里 -->
+    <script>
+        // render里修改赋值
+        const tbody = document.querySelector('#bookTable tbody');
+        const form = document.querySelector('form');
+        // 封装通用http请求函数
+        async function http(options) {
+        // 1. 解构传入配置
+        let { method, url, params, data } = options
+
+        // 2. 处理url拼接params（get/delete参数拼地址栏）
+        if (params) {
+            // 把参数对象转 ?id=1&xxx=xx 格式
+            const searchParams = new URLSearchParams(params)
+            url += '?' + searchParams.toString()
+        }
+
+        // 3. 基础请求配置
+        const fetchConfig = {
+            method: method,
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        }
+
+        // 4. post请求携带请求体data
+        if (data) {
+            fetchConfig.body = JSON.stringify(data)
+        }
+
+        // 5. 发起fetch请求，等待后端返回
+        const res = await fetch(url, fetchConfig)
+        // 解析json数据并返回
+        return await res.json()
+        }
+        /*
+获取所有图书：
+1、接口地址：http://ajax-base-api-t.itheima.net/api/getbooks
+2、请求方式：get
+
+添加图书：
+1、接口地址：http://ajax-base-api-t.itheima.net/api/addbook
+2、请求方式：post
+3、请求体参数：
+    1、bookname：图书的名称
+    2、author：作者
+    3、publisher：出版社
+
+删除图书：
+1、接口地址：http://ajax-base-api-t.itheima.net/api/delbook
+2、请求方式：delete
+3、查询参数：
+    1、id：需要删除图片的id
+*/
+//需要页面一打开首屏加载?
+        render();
+//表单添加数据的功能
+
+        form.addEventListener('submit',async function(e){
+            //组织浏览器的默认行为
+            e.preventDefault()
+            // console.log(111);
+
+            //获取表单数据
+            let result = serialize(form);
+            //把数据提交给后台
+            let res=await http({
+                method:'post',
+                url:'https://ajax-base-api-t.itheima.net/api/addbook',
+                data:result
+            })
+            if(res.stauts<300){
+                // 新增后刷新表格
+                render()
+                // 清空输入框
+                form.reset()
+            }else{
+                console.log('请勿重复提交');
+                
+            }
+
+        })
+//表单删除的功能
+        tbody.addEventListener('click',async function(e){
+            //e.target.tagName获取对象的标签
+            //判断如果点击的是按钮，才进行删除
+            if (e.target.tagName=='BUTTON'){
+                let res=await http({
+                    method:'delete',
+                    url:'https://ajax-base-api-t.itheima.net/api/delbook',
+                    params:{
+                        //e.target.dataset是API语法可以取data-的性质
+                        id:e.target.dataset.id
+                    }
+                })
+                render();
+            if(res.status==204){
+                render();
+            }
+        }
+        })
+        async function render() {
+            //先写一个数据接口:先从服务器获取数据；
+            let res=await http({
+                method:'get',
+                url:'https://ajax-base-api-t.itheima.net/api/getbooks',
+            })
+
+            //对前端进行渲染；
+            let htmlstr=' ';
+            res.data.forEach(item => {
+                htmlstr+=           
+                `<tr>
+                <td>${item.id}</td>
+                <td>${item.bookname}</td>
+                <td>${item.author}</td>
+                <td>${item.publisher}</td>
+
+                <td><button data-id="${item.id}">删除</button></td>
+            </tr>`
+            });
+            tbody.innerHTML = htmlstr;     
+        }
+        // 后续写render渲染函数、新增接口、删除接口逻辑
+    </script>
+</body>
+</html>

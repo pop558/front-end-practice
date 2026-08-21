@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css选择器</title>
+    <style>
+        h2 {
+            color:blue;
+            font-size:20;
+        }
+        .heightlight {
+            background-color: antiquewhite;
+            font-size: 18;
+        }
+        #zsyyyds {
+            font-family: 'heiti';
+        }
+        * {
+            font-family: 'kaiti';
+        }
+        .father > p {
+            color: aqua;
+        }
+        .father p {
+            color: blueviolet;
+        }
+        div + p {
+            background-color: bisque;
+        }
+        #sign:hover {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <h1>不同类型的css选择器</h1>
+    <h2>这是一个元素选择器</h2>
+    <h3 class="heightlight">这是第一个类选择器</h3>
+    <h3>这是第二个类选择器</h3>
+    <h4 id="zsyyyds">这是一个id选择器</h4>
+    <div class="father">这是一个fu选择器实例
+        <p class="son">这是一个子选择器实例</p>
+        <div>
+            <p>这是一个后代选择器</p>
+        </div>
+    </div>
+    <p>这是第一个</p>
+    <div>这是相邻选择器的实例</div>
+    <p>这是第二个</p>
+    <h5 id="sign">这是一个伪类选择器</h5>
+</body>
+</html>

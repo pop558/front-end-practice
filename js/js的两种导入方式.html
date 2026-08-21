@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js的两种导入方式</title>
+    <script>console.log('Hello,world! head内联')</script>
+</head>
+<body>
+    <script>console.log('Hello,world! body内联')</script>
+    <script src="myscript.js"></script>
+    <script>
+        var x=1;
+        let y=2;
+        const PI=3.14;
+        console.log(x,y,PI);    
+        function hello(name){
+            console.log('hello,'+name);
+        }
+        hello('张媛');
+    </script>
+</body>
+</html>

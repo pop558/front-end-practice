@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post接口</title>
+</head>
+<body>
+    <form action="" enctype="application/x-www-form-urlencoded" ></form>
+<script>
+// 测试接口（新增操作）：
+// 接口地址：http://ajax-base-api-t.itheima.net/api/addbook
+// 请求方式: post
+// 请求体参数
+// 1、书名: bookname
+// 2、作者: author
+// 3、出版社: publisher
+
+// post发送: json格式
+// async function add() {
+//     let obj = {
+//         bookname: '魔法书之如何快速学好前端kkxx',
+//         author: '阿尼亚',
+//         publisher: '格兰芬多'
+//     }
+//     //为什么我一定要加s呢有什么区别（跨域）
+//     let res= await fetch('https://ajax-base-api-t.itheima.net/api/addbook',{
+//         method:'post',
+//         headers:{
+//             'Content-Type':'application/json',
+//         },
+//         body:JSON.stringify(obj)
+//     })
+//     let json= await res.json();
+//     // 打印后端完整返回的业务数据（最常用）
+//     console.log('完整返回数据：', json);
+//     // 打印单独字段
+//     console.log('业务状态码：', json.status);
+//     console.log('提示信息：', json.msg);
+
+//     // res.body 是原始二进制流，普通人看不懂，很少打印
+//     console.log('原始响应流：', res.body);
+// }
+// add()
+// 把里面的单引号删掉，查询参数不需要引号：
+// 'https://ajax-base-api-t.itheima.net/api/addbook?bookname=简爱'
+    // fetch('https://ajax-base-api-t.itheima.net/api/addbook?bookname=简爱').then(res=>{
+    // console.log(res);
+    // return res.json();
+    // }).then(json=>{
+    //     console.log(json);
+    // })
+async function http(obj ) {
+    console.log(obj);
+    let { method, url, params, data } =obj;
+    console.log(method,url,params,data);
+
+
+}
+async function fu1( ){
+let return =await http({
+        method:'get',
+        url:'https://ajax-base-api-t.itheima.net/api/addbook',
+        params:{
+            id:22
+        }
+    })
+}
+
+async function fu2( ) {
+let return =await http({
+        method:'post',
+        url:'https://ajax-base-api-t.itheima.net/api/addbook',
+        data:{
+            bookname:'金字塔原理',
+            authoer:'荣格',
+            publisher:'嘻嘻出版社'
+        }
+    })
+}
+</script>
+</html>
